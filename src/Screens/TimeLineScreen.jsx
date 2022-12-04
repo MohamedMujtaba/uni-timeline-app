@@ -18,7 +18,7 @@ const TimeLineScreen = () => {
   const d = moment(today).format("dddd");
   const date = moment(today).format("D MMMM , YYYY");
   const { height } = Dimensions.get("window");
-  const [lectures, SetLectures] = useState([]);
+  const [lectures, setLectures] = useState([]);
   const [loading, setLoading] = useState(true);
   const [l, setL] = useState("");
   const { day } = useSelector((state) => state.day);
@@ -27,43 +27,27 @@ const TimeLineScreen = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // const getData = async () => {
-    //   try {
-    //     setLoading(true);
-    //     // `https://uni-api-v1.vercel.app/api/v1/lecture?date=${router.query["date"]}&dep=${params.dep}&year=${params.year}`
-    //     const res = await axios.get(
-    //       `http://localhost:5000/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
-    //       // `https://uni-api-v1.vercel.app/api/v1/lecture?date=${day}&dep=${"Pet"}&year=${"019"}`,
-    //     );
-    //     SetLectures(res.data.lectures);
-    //     setLoading(false);
-    //   } catch (error) {
-    //     setLoading(false);
-    //     console.log(error);
-    //   }
-    // };
-    // getData();
-  }, [day]);
+    let y = days?.find((i) => i._id === day);
+    setLectures(y.lectures);
+    console.log(lectures.lectures);
+  }, [day, days]);
+  const getData = async () => {
+    try {
+      // `https://uni-api-v1.vercel.app/api/v1/lecture?date=${router.query["date"]}&dep=${params.dep}&year=${params.year}`
+      const res = await axios.get(
+        // `http://localhost:5000/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
+        `https://uni-api-v1.vercel.app/api/v1/lecture/get-grouped-lectures?dep=Pet&year=019`
+        // `https://uni-api-v1.vercel.app/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
+      );
+      const r = res.data.lectures;
+      dispatch(setDays({ days: r }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
   useEffect(() => {
-    const getData = async () => {
-      try {
-        // `https://uni-api-v1.vercel.app/api/v1/lecture?date=${router.query["date"]}&dep=${params.dep}&year=${params.year}`
-        const res = await axios.get(
-          // `http://localhost:5000/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
-          `https://uni-api-v1.vercel.app/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
-        );
-        const r = await res.data.lectures;
-        dispatch(setDays({ days: r }));
-        console.log("====================================");
-        console.log(r.filter((i) => i._id === day.lectures));
-        console.log("====================================");
-      } catch (error) {
-        console.log(error);
-      }
-    };
     getData();
-    console.log({ day, year, dep });
-  }, [day]);
+  }, []);
   // useGetData();
   // console.log(days);
 
@@ -91,9 +75,9 @@ const TimeLineScreen = () => {
       {/* FIXME: margin */}
       <View className="mb-[150] mt-4 h-[53%]">
         <ScrollView>
-          {lectures.map((lecture) => (
+          {/* {lectures?.map((lecture) => (
             <TimeLineItem lecture={lecture} key={lecture._id} />
-          ))}
+          ))} */}
         </ScrollView>
       </View>
     </View>
