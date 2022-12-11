@@ -3,16 +3,17 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isLoading: false,
   isError: "",
-  days: [],
+  isOnline: true,
+  data: [],
 };
 
 const daysSlice = createSlice({
   name: "days",
   initialState,
   reducers: {
-    setDays: (state, { payload }) => {
-      const { days } = payload;
-      state.days = days;
+    setData: (state, { payload }) => {
+      const { data } = payload;
+      state.data = data;
     },
     setLoading: (state, { payload }) => {
       const { isLoading } = payload;
@@ -22,8 +23,12 @@ const daysSlice = createSlice({
       const { isError } = payload;
       state.isError = isError;
     },
+    setIsOnline: (state, { payload }) => {
+      const { isOnline } = payload;
+      state.isOnline = isOnline;
+    },
   },
 });
 
 export default daysSlice.reducer;
-export const { setDays, setLoading, setError } = daysSlice.actions;
+export const { setData, setLoading, setError, setIsOnline } = daysSlice.actions;

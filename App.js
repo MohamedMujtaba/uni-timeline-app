@@ -12,6 +12,8 @@ import { Provider, useSelector, useDispatch } from "react-redux";
 import { saveToken } from "./src/Redux/expoTokenSlice";
 import * as Notifications from "expo-notifications";
 import { PersistGate } from "redux-persist/integration/react";
+import SwitchNavigation from "./src/Navigation/SwitchNavigation";
+import axios from "axios";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
@@ -38,11 +40,29 @@ const StatefullApp = () => {
   const notificationListener = useRef();
   const responseListener = useRef();
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.token);
+  const { token: savedToken } = useSelector((state) => state.token);
+  const { dep, year } = useSelector((state) => state.params);
+
+  const addTokenToDataBase = async (t) => {
+    try {
+      await axios.post(
+        `https://uni-api-v1.vercel.app/api/v1/session?sessionName=${dep}-${year}`,
+        { token: t }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    registerForPushNotificationsAsync().then((token) =>
-      dispatch(saveToken({ token: token }))
-    );
+    registerForPushNotificationsAsync().then((token) => {
+      // if (!savedToken) {
+      dispatch(saveToken({ token: token }));
+      console.log(token);
+      // }
+    });
+    addTokenToDataBase(savedToken);
 
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
@@ -65,13 +85,7 @@ const StatefullApp = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Tab.Screen name="TimeLine" component={TimeLineScreen} />
-        </Tab.Navigator>
+        <SwitchNavigation />
       </NavigationContainer>
     </SafeAreaProvider>
   );

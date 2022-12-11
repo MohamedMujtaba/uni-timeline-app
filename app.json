@@ -12,7 +12,8 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/14f86041-c0c6-4796-8ab9-dcddf6991214"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -24,7 +25,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.mj_dev.uniappv1",
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,11 +39,18 @@
           "icon": "./assets/icon.png",
           "color": "#ffffff",
           "sounds": [
-            "./assets/notification-sound.wav"
+            "./assets/notification.wav"
           ]
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "14f86041-c0c6-4796-8ab9-dcddf6991214"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    }
   }
-  
 }

@@ -41,7 +41,10 @@ const DaysList = () => {
   const today = new Date();
   const d = moment(today).format("dddd");
   const { day } = useSelector((state) => state.day);
+  const { data } = useSelector((state) => state.days);
   const dispatch = useDispatch();
+  // console.log(data);
+  // console.log(data.filter((item) => item._id === "Sunday")[0].lectures.length);
   return (
     <View className="px-4 mt-1">
       <FlatList
@@ -70,7 +73,10 @@ const DaysList = () => {
                 }
               />
               <Text>{item.short}</Text>
-              <Text>3</Text>
+              <Text>
+                {data.filter((i) => i._id === item.val)[0]?.lectures.length ||
+                  0}
+              </Text>
             </TouchableOpacity>
           );
         }}

@@ -19,9 +19,10 @@ const TimeLineItem = ({ lecture }) => {
     <View className="flex-row w-full h-40 items-center justify-evenly">
       <View className="h-full w-[10%] items-center justify-center">
         <View
-          className="h-[100%] bg-gray-400"
+          className="h-[100%]"
           style={{
             width: StyleSheet.hairlineWidth,
+            backgroundColor: getColor(status),
           }}
         />
         <View className="absolute bg-white">
@@ -40,11 +41,11 @@ const TimeLineItem = ({ lecture }) => {
         className="w-[80%] h-[90%] border-gray-400 rounded-xl p-4"
         style={{ borderWidth: StyleSheet.hairlineWidth }}
       >
-        <Text className="font-semibold text-base text-left">{title}</Text>
-        <Text className="text-gray-500 text-xs ">{code}</Text>
+        <Text className="font-semibold text-base text-left mb-1">{title}</Text>
+        <Text className="text-gray-500 text-xs mb-2 ">{code}</Text>
         <View className="flex-row items-center justify-start">
           <MaterialIcons name="my-location" size={18} color="black" />
-          <Text className="ml-1">Falcory of Engnering, </Text>
+          <Text className="ml-1">Faculty of Engineering, </Text>
           <Text>{hall}</Text>
         </View>
       </View>

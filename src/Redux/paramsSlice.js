@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  year: "Pet",
-  dep: "019",
+  year: "",
+  dep: "",
 };
 
 const paramsSlice = createSlice({
@@ -14,8 +14,12 @@ const paramsSlice = createSlice({
       state.year = year;
       state.dep = dep;
     },
+    clearParams: (state) => {
+      state.year = "";
+      state.dep = "";
+    },
   },
 });
 
 export default paramsSlice.reducer;
-export const { saveParams } = paramsSlice.actions;
+export const { saveParams, clearParams } = paramsSlice.actions;
