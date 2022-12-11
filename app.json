@@ -2,7 +2,7 @@
   "expo": {
     "name": "uni-app-v1",
     "slug": "uni-app-v1",
-    "version": "1.0.0",
+    "version": "0.0.2",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -12,7 +12,7 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0,
+      "fallbackToCacheTimeout": 1,
       "url": "https://u.expo.dev/14f86041-c0c6-4796-8ab9-dcddf6991214"
     },
     "assetBundlePatterns": [
@@ -26,8 +26,13 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.mj_dev.uniappv1",
-      "googleServicesFile": "./google-services.json"
+      "permissions": [
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "NOTIFICATIONS"
+      ],
+      "googleServicesFile": "./google-services.json",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
