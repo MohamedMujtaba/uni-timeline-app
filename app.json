@@ -32,7 +32,8 @@
         "NOTIFICATIONS"
       ],
       "googleServicesFile": "./google-services.json",
-      "versionCode": 2
+      "versionCode": 2,
+      "package": "com.mj_dev.uniappv1"
     },
     "web": {
       "favicon": "./assets/favicon.png"
