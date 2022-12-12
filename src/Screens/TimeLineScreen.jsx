@@ -96,14 +96,18 @@ const TimeLineScreen = () => {
           height: height * 0.3,
         }}
       >
-        <SafeAreaView className="px-4">
-          <Text>{d}</Text>
-          <Text>{date}</Text>
-          <TouchableOpacity onPress={() => dispatch(clearParams())}>
+        <SafeAreaView className="px-4 pb-9 flex-1  justify-end">
+          <Text className="text-base font-semibold text-white">{d}</Text>
+          <Text className="text-xl font-semibold text-white">{date}</Text>
+          {/* <TouchableOpacity onPress={() => dispatch(clearParams())}>
             <Text>clear</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={async () => await checkForUpdates()}>
-            <Text>clear</Text>
+      */}
+          <TouchableOpacity
+            className="absolute top-7"
+            onPress={() => checkForUpdates()}
+          >
+            <Text>checkForUpdates</Text>
           </TouchableOpacity>
         </SafeAreaView>
         <View className="w-full h-7 bg-white absolute bottom-0 left-0 right-0 rounded-tl-xl rounded-tr-xl" />
