@@ -4,6 +4,7 @@ import { StatusBar } from "expo-status-bar";
 
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import TimeLineScreen from "./src/Screens/TimeLineScreen";
+import { Text, TextInput, I18nManager } from "react-native";
 
 import React, { useState, useEffect, useRef } from "react";
 import { registerForPushNotificationsAsync } from "./src/utils/registerForPushNotificationsAsync";
@@ -14,6 +15,13 @@ import * as Notifications from "expo-notifications";
 import { PersistGate } from "redux-persist/integration/react";
 import SwitchNavigation from "./src/Navigation/SwitchNavigation";
 import axios from "axios";
+
+I18nManager.forceRTL(false);
+I18nManager.allowRTL(false);
+Text.defaultProps = Text.defaultProps || {};
+Text.defaultProps.allowFontScaling = false;
+TextInput.defaultProps = TextInput.defaultProps || {};
+TextInput.defaultProps.allowFontScaling = false;
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

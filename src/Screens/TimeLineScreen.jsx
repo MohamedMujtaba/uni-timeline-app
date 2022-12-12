@@ -21,6 +21,7 @@ import { useGetData } from "../utils/useGetData";
 import { setDays } from "../Redux/daysSlice";
 import NetworkStatus from "../Components/NetworkStatus";
 import { clearParams } from "../Redux/paramsSlice";
+import checkForUpdates from "../utils/checkForUpdates";
 const TimeLineScreen = () => {
   // const [address] = useGetData();
 
@@ -99,6 +100,9 @@ const TimeLineScreen = () => {
           <Text>{d}</Text>
           <Text>{date}</Text>
           <TouchableOpacity onPress={() => dispatch(clearParams())}>
+            <Text>clear</Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={async () => await checkForUpdates()}>
             <Text>clear</Text>
           </TouchableOpacity>
         </SafeAreaView>
