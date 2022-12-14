@@ -24,8 +24,12 @@ const days = [
     val: "Tuesday",
   },
   {
-    short: "Thu",
+    short: "Wed",
     val: "Wednesday",
+  },
+  {
+    short: "Thu",
+    val: "Thursday",
   },
   {
     short: "Fri",
