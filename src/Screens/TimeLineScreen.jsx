@@ -128,7 +128,7 @@ const TimeLineScreen = () => {
           {renderData()}
         </ScrollView>
       </View>
-      {!isOnline && <NetworkStatus />}
+      <SafeAreaView>{!isOnline && <NetworkStatus />}</SafeAreaView>
     </View>
   );
 };
