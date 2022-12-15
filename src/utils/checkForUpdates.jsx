@@ -33,7 +33,7 @@ const checkForUpdates = async (showSuccess = false) => {
     }
   } catch (error) {
     console.log(error);
-    Alert.alert("Error", "An error occurred while checking for updates.");
+    Alert.alert("Error", error);
   }
 };
 

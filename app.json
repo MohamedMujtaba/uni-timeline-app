@@ -2,7 +2,7 @@
   "expo": {
     "name": "uni-app-v1",
     "slug": "uni-app-v1",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -19,7 +19,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "buildNumber": "1"
     },
     "android": {
       "adaptiveIcon": {
