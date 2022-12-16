@@ -13,7 +13,7 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 1,
+      "fallbackToCacheTimeout": 15000,
       "url": "https://u.expo.dev/14f86041-c0c6-4796-8ab9-dcddf6991214"
     },
     "assetBundlePatterns": [
@@ -21,7 +21,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "1"
+      "buildNumber": "4"
     },
     "android": {
       "adaptiveIcon": {
@@ -34,7 +34,7 @@
         "NOTIFICATIONS"
       ],
       "googleServicesFile": "./google-services.json",
-      "versionCode": 2,
+      "versionCode": 4,
       "package": "com.mj_dev.uniappv1"
     },
     "web": {

@@ -15,6 +15,7 @@ import expoTokenSlice from "./expoTokenSlice";
 import paramsSlice from "./paramsSlice";
 import daySlice from "./daySlice";
 import daysSlice from "./daysSlice";
+import notificationSlice from "./notificationSlice";
 const persistConfig = {
   key: "root",
   version: 1,
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   token: expoTokenSlice,
   day: daySlice,
   days: daysSlice,
+  notifications: notificationSlice,
 });
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({

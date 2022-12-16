@@ -15,6 +15,7 @@ import * as Notifications from "expo-notifications";
 import { PersistGate } from "redux-persist/integration/react";
 import SwitchNavigation from "./src/Navigation/SwitchNavigation";
 import axios from "axios";
+import { addNotification } from "./src/Redux/notificationSlice";
 
 I18nManager.forceRTL(false);
 I18nManager.allowRTL(false);
@@ -65,16 +66,15 @@ const StatefullApp = () => {
 
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
-      // if (!savedToken) {
-      dispatch(saveToken({ token: token }));
-      console.log(token);
-      // }
+      if (!savedToken) {
+        dispatch(saveToken({ token: token }));
+        addTokenToDataBase(token);
+      }
     });
-    addTokenToDataBase(savedToken);
 
     notificationListener.current =
       Notifications.addNotificationReceivedListener((notification) => {
-        setNotification(notification);
+        dispatch(addNotification({ notification }));
       });
 
     responseListener.current =

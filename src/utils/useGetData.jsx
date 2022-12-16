@@ -26,22 +26,16 @@ export const useGetData = () => {
 
   // `https://uni-api-v1.vercel.app/api/v1/lecture?date=${router.query["date"]}&dep=${params.dep}&year=${params.year}`
   // `http://localhost:5000/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
-
+  const checkInternet = async () => {
+    const network = await Network.getNetworkStateAsync();
+    setIsConnected(network.isConnected);
+    dispatch(setIsOnline({ isOnline: network.isConnected }));
+  };
   const getData = async () => {
-    const checkInternet = async () => {
-      const network = await Network.getNetworkStateAsync();
-      setIsConnected(network.isConnected);
-      dispatch(setIsOnline({ isOnline: network.isConnected }));
-    };
-    checkInternet();
+    await checkInternet();
     if (isOnline) {
-      console.log(data);
-      console.log(isLoading);
       try {
         dispatch(setLoading({ isLoading: true }));
-        console.log(
-          `https://uni-api-v1.vercel.app/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
-        );
         const res = await axios.get(
           `https://uni-api-v1.vercel.app/api/v1/lecture/get-grouped-lectures?dep=${dep}&year=${year}`
         );
@@ -51,8 +45,6 @@ export const useGetData = () => {
         // console.log(r);
         dispatch(setData({ data: r }));
         dispatch(setLoading({ isLoading: false }));
-
-        console.log(isLoading);
       } catch (error) {
         dispatch(setLoading({ isLoading: false }));
 
@@ -60,6 +52,7 @@ export const useGetData = () => {
       }
     }
   };
+
   useEffect(() => {
     getData();
   }, [dep, year]);

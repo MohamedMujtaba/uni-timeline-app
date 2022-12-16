@@ -22,22 +22,25 @@ import { setDays } from "../Redux/daysSlice";
 import NetworkStatus from "../Components/NetworkStatus";
 import { clearParams } from "../Redux/paramsSlice";
 import checkForUpdates from "../utils/checkForUpdates";
+import { Ionicons } from "@expo/vector-icons";
 const TimeLineScreen = () => {
   // const [address] = useGetData();
 
   const today = new Date();
   const d = moment(today).format("dddd");
-  const date = moment(today).format("D MMMM , YYYY");
+  const date = moment(today).format("D MMMM");
   const { height } = Dimensions.get("window");
   const [lectures, setLectures] = useState([]);
   // const [loading, setLoading] = useState(true);
   const [l, setL] = useState("");
   const { day } = useSelector((state) => state.day);
   const { year, dep } = useSelector((state) => state.params);
+  const { notifications } = useSelector((state) => state.notifications);
   const { data, isOnline, isLoading } = useSelector((state) => state.days);
   const dispatch = useDispatch();
   const [refreshing, setRefreshing] = React.useState(false);
   const { getData } = useGetData();
+  console.log(notifications[0].request.identifier);
   const onRefresh = React.useCallback(() => {
     getData();
   }, []);
@@ -93,42 +96,63 @@ const TimeLineScreen = () => {
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
         style={{
-          height: height * 0.3,
+          height: height * 0.2,
         }}
       >
-        <SafeAreaView className="px-4 pb-9 flex-1  justify-end">
-          <Text className="text-base font-semibold text-white">{d}</Text>
-          <Text className="text-xl font-semibold text-white">{date}</Text>
-          {/* <TouchableOpacity onPress={() => dispatch(clearParams())}>
-            <Text>clear</Text>
-          </TouchableOpacity>
-      */}
-          <TouchableOpacity
-            className="absolute top-7"
-            onPress={() => checkForUpdates()}
-          >
-            <Text>checkForUpdates</Text>
-          </TouchableOpacity>
+        <SafeAreaView className="px-4 pb-10 flex-1 items-center justify-between flex-row">
+          <View>
+            <Text className="text-base font-semibold text-white">{d}</Text>
+            <Text className="text-xl font-semibold text-white">{date}</Text>
+          </View>
+          <View>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              className="w-10 h-10 rounded-full items-center justify-center bg-slate-50"
+            >
+              <View className="w-5 h-5 bg-blue-500 absolute -top-1 -right-1 z-10 rounded-full items-center justify-center">
+                <Text
+                  className="text-white"
+                  style={{
+                    fontSize: 10,
+                  }}
+                >
+                  {notifications.length}
+                </Text>
+              </View>
+              <Ionicons
+                name="md-notifications-outline"
+                size={24}
+                color="black"
+              />
+            </TouchableOpacity>
+            {/* <View className="w-full h-full bg-blue-300" /> */}
+          </View>
         </SafeAreaView>
         <View className="w-full h-7 bg-white absolute bottom-0 left-0 right-0 rounded-tl-xl rounded-tr-xl" />
       </LinearGradient>
       <DaysList />
       {/* FIXME: margin */}
-      <View className=" mt-4 h-[53%]">
+      <SafeAreaView className=" flex-1">
         <ScrollView
           overScrollMode="never"
-          className="mb-9"
+          // className="mb-2"
+          style={
+            {
+              // flex: 1,
+            }
+          }
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }
         >
-          {/* {data?.map((lecture) => (
-            <TimeLineItem lecture={lecture} key={lecture._id} />
-          ))} */}
           {renderData()}
         </ScrollView>
-      </View>
-      <SafeAreaView>{!isOnline && <NetworkStatus />}</SafeAreaView>
+      </SafeAreaView>
+      {/* </View> */}
+      <SafeAreaView>{!isOnline ? <NetworkStatus /> : null}</SafeAreaView>
+      {/* <SafeAreaView>
+        <NetworkStatus />
+      </SafeAreaView> */}
     </View>
   );
 };

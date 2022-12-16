@@ -28,15 +28,15 @@ const SwitchNavigation = () => {
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
-          tabBarStyle: { display: "none" },
+          // tabBarStyle: { display: "none" },
         }}
       >
         <Tab.Screen
           name="Root"
           component={TimeLineScreen}
-          options={{
-            tabBarVisible: false,
-          }}
+          // options={{
+          //   tabBarVisible: false,
+          // }}
         />
       </Tab.Navigator>
     );
