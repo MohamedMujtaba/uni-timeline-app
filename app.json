@@ -2,7 +2,7 @@
   "expo": {
     "name": "uni-app-v1",
     "slug": "uni-app-v1",
-    "version": "0.0.3",
+    "version": "0.0.31",
     "sdkVersion": "47.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
