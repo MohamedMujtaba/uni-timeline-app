@@ -43,16 +43,9 @@ const TabNavigation = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        // tabBarStyle: { display: "none" },
       }}
     >
-      <Tab.Screen
-        name="TimeLine"
-        component={TimeLineScreen}
-        // options={{
-        //   tabBarVisible: false,
-        // }}
-      />
+      <Tab.Screen name="TimeLine" component={TimeLineScreen} />
     </Tab.Navigator>
   );
 };

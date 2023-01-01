@@ -68,12 +68,12 @@ const TimeLineScreen = () => {
     if (isLoading) {
       return (
         <Animated.View
-          className="h-72 items-center justify-center"
+          className="h-80 items-center justify-center"
           entering={FadeIn.delay(100)}
           exiting={FadeOut.duration(1)}
         >
           <Animated.Image
-            source={require("../../assets/loading.gif")}
+            source={require("../../assets/services.gif")}
             className="w-24 h-24"
           />
         </Animated.View>
