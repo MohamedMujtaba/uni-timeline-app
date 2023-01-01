@@ -7,8 +7,9 @@ import {
   Octicons,
   SimpleLineIcons,
 } from "@expo/vector-icons";
+import Animated, { FadeIn, FadeOut } from "react-native-reanimated";
 
-const TimeLineItem = ({ lecture }) => {
+const TimeLineItem = ({ lecture, index }) => {
   const { title, code, time, hall, status } = lecture;
   const getColor = (s) => {
     if (s === "listed") return "#bef264";
@@ -16,7 +17,11 @@ const TimeLineItem = ({ lecture }) => {
     if (s === "canceled") return "#fb7185";
   };
   return (
-    <View className="flex-row w-full h-40 items-center justify-evenly">
+    <Animated.View
+      className="flex-row w-full h-40 items-center justify-evenly"
+      entering={FadeIn.delay(100 * index)}
+      exiting={FadeOut.duration(1)}
+    >
       <View className="h-full w-[10%] items-center justify-center">
         <View
           className="h-[100%]"
@@ -49,7 +54,7 @@ const TimeLineItem = ({ lecture }) => {
           <Text>{hall}</Text>
         </View>
       </View>
-    </View>
+    </Animated.View>
   );
 };
 

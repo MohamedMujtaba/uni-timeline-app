@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import LoginScreen from "../Screens/LoginScreen";
 import TimeLineScreen from "../Screens/TimeLineScreen";
+import NotificationsScreen from "../Screens/NotificationsScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -25,22 +26,35 @@ const SwitchNavigation = () => {
   }
   if (year && dep && token) {
     return (
-      <Tab.Navigator
+      <Stack.Navigator
         screenOptions={{
           headerShown: false,
-          // tabBarStyle: { display: "none" },
         }}
       >
-        <Tab.Screen
-          name="Root"
-          component={TimeLineScreen}
-          // options={{
-          //   tabBarVisible: false,
-          // }}
-        />
-      </Tab.Navigator>
+        <Stack.Screen name="Root" component={TabNavigation} />
+        <Stack.Screen name="Notifications" component={NotificationsScreen} />
+      </Stack.Navigator>
     );
   }
+};
+
+const TabNavigation = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        // tabBarStyle: { display: "none" },
+      }}
+    >
+      <Tab.Screen
+        name="TimeLine"
+        component={TimeLineScreen}
+        // options={{
+        //   tabBarVisible: false,
+        // }}
+      />
+    </Tab.Navigator>
+  );
 };
 
 export default SwitchNavigation;

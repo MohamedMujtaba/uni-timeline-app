@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import React from "react";
 import { Picker } from "@react-native-picker/picker";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,6 +24,12 @@ const LoginScreen = () => {
 
   return (
     <View className="flex-1 bg-white items-center justify-center">
+      <View className="w-[90%] items-center">
+        <Image
+          source={require("../../assets/dizzy-education.gif")}
+          className="w-full"
+        />
+      </View>
       {deps.map((item, index) => {
         return (
           <TouchableOpacity

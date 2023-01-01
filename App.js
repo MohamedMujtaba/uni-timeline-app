@@ -27,8 +27,8 @@ TextInput.defaultProps.allowFontScaling = false;
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
-    shouldPlaySound: false,
-    shouldSetBadge: false,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
   }),
 });
 
@@ -63,7 +63,7 @@ const StatefullApp = () => {
       console.log(error);
     }
   };
-
+  const lastNotificationResponse = Notifications.useLastNotificationResponse();
   useEffect(() => {
     registerForPushNotificationsAsync().then((token) => {
       if (!savedToken) {
@@ -88,7 +88,7 @@ const StatefullApp = () => {
       );
       Notifications.removeNotificationSubscription(responseListener.current);
     };
-  }, []);
+  }, [lastNotificationResponse]);
 
   return (
     <SafeAreaProvider>
