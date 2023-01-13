@@ -6,6 +6,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import LoginScreen from "../Screens/LoginScreen";
 import TimeLineScreen from "../Screens/TimeLineScreen";
 import NotificationsScreen from "../Screens/NotificationsScreen";
+import CoursesScreen from "../Screens/CoursesScreen";
+import CourseScreen from "../Screens/CourseScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -32,6 +34,7 @@ const SwitchNavigation = () => {
         }}
       >
         <Stack.Screen name="Root" component={TabNavigation} />
+        <Stack.Screen name="Course" component={CourseScreen} />
         <Stack.Screen name="Notifications" component={NotificationsScreen} />
       </Stack.Navigator>
     );
@@ -46,6 +49,7 @@ const TabNavigation = () => {
       }}
     >
       <Tab.Screen name="TimeLine" component={TimeLineScreen} />
+      <Tab.Screen name="Courses" component={CoursesScreen} />
     </Tab.Navigator>
   );
 };

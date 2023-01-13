@@ -16,6 +16,7 @@ import { PersistGate } from "redux-persist/integration/react";
 import SwitchNavigation from "./src/Navigation/SwitchNavigation";
 import axios from "axios";
 import { addNotification } from "./src/Redux/notificationSlice";
+import * as MediaLibrary from "expo-media-library";
 
 I18nManager.forceRTL(false);
 I18nManager.allowRTL(false);
@@ -51,7 +52,10 @@ const StatefullApp = () => {
   const dispatch = useDispatch();
   const { token: savedToken } = useSelector((state) => state.token);
   const { dep, year } = useSelector((state) => state.params);
-
+  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions();
+  useEffect(() => {
+    requestPermission();
+  }, []);
   const addTokenToDataBase = async (t) => {
     try {
       await axios.post(

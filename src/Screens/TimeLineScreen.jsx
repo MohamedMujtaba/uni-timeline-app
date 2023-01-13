@@ -30,6 +30,11 @@ import Animated, {
   FadeInUp,
   FadeOut,
 } from "react-native-reanimated";
+// import { downloadToFolder } from "../utils/Try";
+import * as Notifications from "expo-notifications";
+import { downloadToFolder } from "expo-file-dl";
+
+const channelId = "DownloadInfo";
 const TimeLineScreen = () => {
   // const [address] = useGetData();
   const navigation = useNavigation();
@@ -55,6 +60,15 @@ const TimeLineScreen = () => {
     return network.isConnected;
   };
 
+  const [downloadProgress, setDownloadProgress] = useState(0);
+
+  const downloadProgressUpdater = ({
+    totalBytesWritten,
+    totalBytesExpectedToWrite,
+  }) => {
+    const pctg = 100 * (totalBytesWritten / totalBytesExpectedToWrite);
+    setDownloadProgress(`${pctg.toFixed(0)}%`);
+  };
   useEffect(() => {
     let y = data?.find((i) => i._id === day);
     if (y) {
@@ -99,6 +113,33 @@ const TimeLineScreen = () => {
       ));
     }
   };
+
+  // async function setNotificationChannel() {
+  //   const loadingChannel = await Notifications.getNotificationChannelAsync(
+  //     channelId
+  //   );
+
+  //   // if we didn't find a notification channel set how we like it, then we create one
+  //   if (loadingChannel == null) {
+  //     const channelOptions = {
+  //       name: channelId,
+  //       importance: AndroidImportance.HIGH,
+  //       lockscreenVisibility: AndroidNotificationVisibility.PUBLIC,
+  //       sound: "default",
+  //       vibrationPattern: [250],
+  //       enableVibrate: true,
+  //     };
+  //     await Notifications.setNotificationChannelAsync(
+  //       channelId,
+  //       channelOptions
+  //     );
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   setNotificationChannel();
+  // }, []);
+
   return (
     <View className="flex-1 bg-white ">
       {/* {days.map((i) => (
@@ -115,11 +156,24 @@ const TimeLineScreen = () => {
       >
         <SafeAreaView className="px-4 pb-10 flex-1 items-center justify-between flex-row">
           <TouchableOpacity
-            onPress={() => {
-              dispatch(clearParams());
+            onPress={async () => {
+              // dispatch(clearParams());
+              await downloadToFolder(
+                "http://techslides.com/demos/sample-videos/small.mp4",
+                "Test.mp4",
+                "Download",
+                channelId,
+                {
+                  downloadProgressCallback: downloadProgressUpdater,
+                }
+              );
+              // await downloadToFolder(uri, filename, "Download", channelId, {
+              //   downloadProgressCallback: downloadProgressUpdater,
+              // });
             }}
           >
             <Text>clear</Text>
+            <Text>{downloadProgress}</Text>
           </TouchableOpacity>
           <View>
             <Text className="text-base font-semibold text-white">{d}</Text>
